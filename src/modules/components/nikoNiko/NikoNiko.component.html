@@ -1,0 +1,49 @@
+<app-scrollable-container
+  [viewHeight]="yHeight"
+  [viewWidth]="yWidth + xWidth"
+  [scrollHeight]="4000"
+  [scrollWidth]="4000"
+  [scrollId]="12345"
+>
+</app-scrollable-container>
+<div class="NikoNiko-sheet-container"
+     [style.height.px]="yHeight">
+  <div class="NikoNiko-teammates NikoNiko-teammates-width-holder">
+    <app-virtual-static-cell-table
+      [tableName]="'yAxis'"
+      [rows]="namesRows"
+      [visibleRows]="rowsCount"
+      [visibleColumns]="1"
+      [viewWidth]="yWidth"
+      [viewHeight]="yHeight"
+      [useOwnScroll]="false"
+    ></app-virtual-static-cell-table>
+  </div>
+  <div class="NikoNiko-sheet">
+    <app-virtual-static-cell-table
+      [tableName]="'sheet'"
+      [rows]="matrixRows"
+      [visibleRows]="rowsCount"
+      [visibleColumns]="rowsCount"
+      [viewWidth]="xWidth"
+      [viewHeight]="yHeight"
+      [useOwnScroll]="false"
+    ></app-virtual-static-cell-table>
+  </div>
+</div>
+<div class="NikoNiko-dates-container">
+  <div class="NikoNiko-teammates-width-holder"
+       [style.width.px]="yWidth"
+  ></div>
+  <div class="NikoNiko-dates">
+    <app-virtual-static-cell-table
+      [tableName]="'xAxis'"
+      [rows]="datesColumns"
+      [visibleRows]="1"
+      [visibleColumns]="rowsCount"
+      [viewWidth]="xWidth"
+      [viewHeight]="xHeight"
+      [useOwnScroll]="false"
+    ></app-virtual-static-cell-table>
+  </div>
+</div>

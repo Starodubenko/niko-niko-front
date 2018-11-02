@@ -1,0 +1,38 @@
+:host {
+  display: flex;
+  flex-grow: 1;
+  background-color: #e1ffdd;
+}
+
+.TeamList {
+  flex-shrink: 0;
+  width: 100px;
+}
+
+.TeamList-teammember {
+}
+
+.MetricsList {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  background-color: #cacaff;
+}
+
+.MetricsList-trigger {
+  flex-shrink: 0;
+  height: 30px;
+  background-color: #92fff8;
+}
+
+.Metrics {
+  display: flex;
+  flex-grow: 1;
+  height: 500px;
+  background-color: #75ff6c;
+}
+
+.MetricsList-niko-niko {
+  display: flex;
+  flex-grow: 1;
+}

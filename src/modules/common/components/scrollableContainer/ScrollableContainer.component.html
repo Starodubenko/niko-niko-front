@@ -1,0 +1,11 @@
+<div class="Container"
+     [style.width.px]="viewWidth"
+     [style.height.px]="viewHeight"
+     [style.pointer-events]="!useOwnScroll && 'none'"
+     (scroll)="onScroll($event)">
+  <div class="Container-with-holder"
+       [style.width.px]="scrollWidth"
+       [style.height.px]="scrollHeight">
+  </div>
+  <ng-content></ng-content>
+</div>

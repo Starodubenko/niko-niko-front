@@ -1,0 +1,14 @@
+<div class="MetricsList">
+  <div class="MetricsList-trigger">
+    <button (click)="selectTable()">Table</button>
+    <button (click)="selectPieChart()">Pie chart</button>
+  </div>
+  <div class="Metrics">
+    <div class="MetricsList-niko-niko" *ngIf="isTable()">
+      <ng-content select=".niko-niko"></ng-content>
+    </div>
+    <div class="MetricsList-pie-chart" *ngIf="isPieChart()">
+      <ng-content select=".pie-chart"></ng-content>
+    </div>
+  </div>
+</div>

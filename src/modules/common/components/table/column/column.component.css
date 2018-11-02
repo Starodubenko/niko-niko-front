@@ -1,0 +1,10 @@
+:host {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+:host:not(:last-child) {
+  border-right: 1px solid black;
+}

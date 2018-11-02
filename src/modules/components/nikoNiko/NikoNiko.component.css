@@ -1,0 +1,37 @@
+:host {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+}
+
+.NikoNiko-teammates {
+  display: flex;
+  flex-direction: column;
+  background-color: azure;
+}
+
+.NikoNiko-teammates-width-holder {
+  /*width: 200px;*/
+  flex-shrink: 0;
+}
+
+.NikoNiko-sheet {
+  flex-grow: 1;
+  background-color: cornflowerblue;
+}
+
+.NikoNiko-sheet-container {
+  display: flex;
+  flex-grow: 1;
+  position: absolute;
+}
+
+.NikoNiko-dates {
+  flex-grow: 1;
+  background-color: #cacaff;
+}
+
+.NikoNiko-dates-container {
+  /*height: 50px;*/
+  display: flex;
+}

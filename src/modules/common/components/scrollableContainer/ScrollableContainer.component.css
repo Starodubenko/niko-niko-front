@@ -1,0 +1,9 @@
+.Container{
+  position: relative;
+  overflow: auto;
+  display: flex;
+}
+
+.Container-with-holder {
+  position: absolute;
+}

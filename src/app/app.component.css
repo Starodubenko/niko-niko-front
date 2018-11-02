@@ -1,0 +1,21 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.Container{
+  border: 1px solid black;
+  flex-grow: 1;
+  display: flex;
+}
+
+.Header{
+  height: 50px;
+  background-color: #dedede;
+}
+
+.virtual-viewport {
+  flex-grow: 1;
+}
