@@ -1,35 +1,47 @@
-import {Component, ElementRef, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, HostBinding, HostListener, Input, OnInit} from '@angular/core';
 import {ScrollService} from './service';
 
 @Component({
-  selector: 'app-scrollable-container',
-  templateUrl: './ScrollableContainer.component.html',
-  styleUrls: ['./ScrollableContainer.component.css']
+    selector: 'app-scrollable-container',
+    templateUrl: './ScrollableContainer.component.html',
+    styleUrls: ['./ScrollableContainer.component.css']
 })
 export class ScrollableContainerComponent implements OnInit {
-  @Input() viewWidth;
-  @Input() viewHeight;
-  @Input() scrollHeight;
-  @Input() scrollWidth;
-  @Input() scrollId;
-  @Input() useOwnScroll = true;
+    @Input() viewWidth;
+    @Input() viewHeight;
+    @Input() scrollHeight = 0;
+    @Input() scrollWidth = 0;
+    @Input() scrollId;
+    @Input() useOwnScroll = true;
 
-  constructor(private elRef: ElementRef,
-              private scrollService: ScrollService) {
-  }
+    @HostBinding('style.height.px') height = 0;
+    @HostBinding('style.width.px') width = 0;
+    @HostBinding('style.pointer-events') pe = 'auto';
 
-  ngOnInit() {
-    this.scrollService.getScrollChanges()
-      .subscribe(({scroll, scrollId}) => {
-        if (scrollId !== this.scrollId) {
-          this.elRef.nativeElement.children[0].scrollLeft = scroll.target.scrollLeft;
-          this.elRef.nativeElement.children[0].scrollTop = scroll.target.scrollTop;
+    constructor(private elRef: ElementRef,
+                private scrollService: ScrollService) {
+    }
+
+    ngOnInit() {
+        this.height = this.viewHeight;
+        this.width = this.viewWidth;
+        this.pe = this.useOwnScroll ? 'auto' : 'none';
+
+
+        if (this.useOwnScroll) {
+            this.elRef.nativeElement.addEventListener('scroll', (event) => {
+                this.scrollService.setScroll(event, this.scrollId);
+            }, {
+                capture: this.useOwnScroll
+            });
         }
-      });
-  }
 
-  onScroll(e) {
-    e.preventDefault();
-    this.scrollService.setScroll(e, this.scrollId);
-  }
+        if (!this.useOwnScroll) {
+            this.scrollService.getScrollChanges()
+                .subscribe(({scroll, scrollId}) => {
+                    this.elRef.nativeElement.scrollLeft = scroll.target.scrollLeft;
+                    this.elRef.nativeElement.scrollTop = scroll.target.scrollTop;
+                });
+        }
+    }
 }

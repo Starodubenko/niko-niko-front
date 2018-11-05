@@ -1,8 +1,8 @@
 <app-scrollable-container
-  [viewHeight]="yHeight"
+  [viewHeight]="yHeight + xHeight"
   [viewWidth]="yWidth + xWidth"
-  [scrollHeight]="4000"
-  [scrollWidth]="4000"
+  [scrollHeight]="totalHeight"
+  [scrollWidth]="totalWidth"
   [scrollId]="12345"
 >
 </app-scrollable-container>
@@ -28,6 +28,7 @@
       [viewWidth]="xWidth"
       [viewHeight]="yHeight"
       [useOwnScroll]="false"
+      (totalTableDimensions)="getTotalDimensions($event)"
     ></app-virtual-static-cell-table>
   </div>
 </div>

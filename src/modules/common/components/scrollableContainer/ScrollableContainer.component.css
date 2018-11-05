@@ -1,4 +1,4 @@
-.Container{
+:host {
   position: relative;
   overflow: auto;
   display: flex;

@@ -5,24 +5,25 @@ import {filter} from 'rxjs/operators';
 @Injectable()
 export class ScrollService {
 
-  scrollChanges$ = new Subject<any>();
-  scroll$ = new ReplaySubject<any>(null);
+    scrollChanges$ = new Subject<any>();
+    scroll$ = new ReplaySubject<any>(null);
 
-  constructor() {}
+    constructor() {
+    }
 
-  setScroll(scroll, scrollId = '') {
-    this.scroll$.next(scroll);
-    this.scrollChanges$.next({scroll, scrollId});
-  }
+    setScroll(scroll, scrollId = '') {
+        this.scroll$.next(scroll);
+        this.scrollChanges$.next({scroll, scrollId});
+    }
 
-  getScroll(): Observable<any> {
-    return this.scroll$
-      .pipe(
-        filter(val => val)
-      );
-  }
+    getScroll(): Observable<any> {
+        return this.scroll$
+            .pipe(
+                filter(val => val)
+            );
+    }
 
-  getScrollChanges(): Observable<any> {
-    return this.scrollChanges$;
-  }
+    getScrollChanges(): Observable<any> {
+        return this.scrollChanges$;
+    }
 }

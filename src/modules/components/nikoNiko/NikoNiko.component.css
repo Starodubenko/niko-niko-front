@@ -2,6 +2,7 @@
   display: flex;
   flex-grow: 1;
   flex-direction: column;
+  position: relative;
 }
 
 .NikoNiko-teammates {
@@ -34,4 +35,6 @@
 .NikoNiko-dates-container {
   /*height: 50px;*/
   display: flex;
+  position: absolute;
+  bottom: 0;
 }

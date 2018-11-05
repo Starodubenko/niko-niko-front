@@ -1,32 +1,32 @@
-import {Component, HostBinding, Input, OnInit} from '@angular/core';
+import {Component, HostBinding, HostListener, Input, OnInit} from '@angular/core';
 import {TableStateHolderService} from '../service/tableStateHolder.service';
 
 @Component({
-  selector: 'app-column',
-  templateUrl: './comumn.component.html',
-  styleUrls: ['./column.component.css']
+    selector: 'app-column',
+    templateUrl: './column.component.html',
+    styleUrls: ['./column.component.css']
 })
 export class ColumnComponent implements OnInit {
 
-  @HostBinding('style.height.px') height = 0;
-  @HostBinding('style.width.px') width = 0;
-  @HostBinding('style.left.px') left = 0;
-  @HostBinding('style.pointer-events') pe = 'auto';
+    @HostBinding('style.height.px') height = 0;
+    @HostBinding('style.width.px') width = 0;
+    @HostBinding('style.left.px') left = 0;
 
-  @Input() index;
-  @Input() data;
+    @Input() index;
+    @Input() data;
 
-  columnOffset = 0;
+    columnOffset = 0;
 
-  constructor(private tableStateHolderService: TableStateHolderService) {}
+    constructor(private tableStateHolderService: TableStateHolderService) {
+    }
 
-  ngOnInit() {
-    const {cellWidth, cellHeight} = this.tableStateHolderService.getDimensions();
+    ngOnInit() {
+        const {cellWidth, cellHeight} = this.tableStateHolderService.getDimensions();
 
-    this.height = cellHeight;
-    this.width = cellWidth;
-    this.left = this.tableStateHolderService.getXoffset(this.index);
+        this.height = cellHeight;
+        this.width = cellWidth;
+        this.left = this.tableStateHolderService.getXoffset(this.index);
 
-    this.columnOffset = this.tableStateHolderService.getXoffset(this.index);
-  }
+        this.columnOffset = this.tableStateHolderService.getXoffset(this.index);
+    }
 }

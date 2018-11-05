@@ -4,10 +4,6 @@
   [scrollId]="tableName"
   [useOwnScroll]="useOwnScroll"
 >
-  <div class="Container-with-holder"
-       [style.width.px]="calculatedWidth"
-       [style.height.px]="calculatedHeight">
-  </div>
   <app-row
     *ngFor="let row of selectedRows; trackBy: trackById"
     [index]="row.index"
