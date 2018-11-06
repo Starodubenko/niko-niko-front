@@ -3,6 +3,7 @@ import {TableStateHolderService} from './service/tableStateHolder.service';
 import {calculateVisibleRows} from './service/helper';
 import {ScrollService} from '../scrollableContainer/service';
 import {ITableRow} from './model';
+import {TableEventsService} from "./service/tableEvents.service";
 
 @Component({
     selector: 'app-virtual-static-cell-table',
@@ -21,10 +22,10 @@ export class VirtualStaticCellTableComponent implements OnInit, AfterViewInit {
     @Input() viewHeight: number;
     @Input() tableName: string;
     @Input() useOwnScroll = true;
+    @Input() valueMapper: (data) => any;
 
     @Output() totalTableDimensions = new EventEmitter();
-
-    @HostBinding('style.pointer-events') pe = 'auto';
+    @Output() onCellClick = new EventEmitter();
 
     cellWidth = 0;
     cellHeight = 0;
@@ -34,13 +35,12 @@ export class VirtualStaticCellTableComponent implements OnInit, AfterViewInit {
 
     constructor(
         private tableStateHolderService: TableStateHolderService,
-        private scrollService: ScrollService
+        private scrollService: ScrollService,
+        private tableEventsService: TableEventsService
     ) {
     }
 
     ngOnInit() {
-        this.pe = this.useOwnScroll ? 'auto' : 'none';
-
         if (!this.rows || !this.rows.length) {
             return;
         }
@@ -65,6 +65,15 @@ export class VirtualStaticCellTableComponent implements OnInit, AfterViewInit {
         this.scrollService.getScroll().subscribe(scroll => {
             this.selectedRows = this.getSelectedRows(scroll.target.scrollTop, this.cellHeight);
         });
+
+        this.tableEventsService.watchCellClick()
+            .subscribe(cellData => {
+                this.onCellClick.emit(cellData);
+            });
+
+        if(this.valueMapper) {
+            this.tableStateHolderService.setValueMapper(this.valueMapper);
+        }
     }
 
     ngAfterViewInit(): void {

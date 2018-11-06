@@ -1,4 +1,4 @@
-import {Component, HostBinding, Inject, Input, OnInit} from '@angular/core';
+import {Component, HostBinding, HostListener, Inject, Input, OnInit} from '@angular/core';
 import {DataProviderToken} from '../../common/services/dataProvider/constants';
 import {IDataProvider} from '../../common/services/dataProvider';
 import {ScrollService} from '../../common/components/scrollableContainer/service';
@@ -19,7 +19,16 @@ export class NikoNikoComponent implements OnInit {
 
     @HostBinding('style.height.px') hostHeight;
     @HostBinding('style.width.px') hostWidth;
-    @HostBinding('style.pointer-events') pe = 'none';
+
+    @HostListener('mousedown')
+    onMouseDown() {
+        this.scrollService.disableMasterScroll();
+    }
+
+    @HostListener('mouseup')
+    onMouseUp() {
+        this.scrollService.enableMasterScroll();
+    }
 
     yWidth = 200;
     yHeight;
@@ -33,7 +42,8 @@ export class NikoNikoComponent implements OnInit {
     matrixRows = [];
     datesColumns = [];
 
-    constructor(@Inject(DataProviderToken) private dataProvider: IDataProvider) {
+    constructor(@Inject(DataProviderToken) private dataProvider: IDataProvider,
+                private scrollService: ScrollService) {
     }
 
     ngOnInit() {
@@ -49,7 +59,11 @@ export class NikoNikoComponent implements OnInit {
         for (let i = 0; i < 30; i++) {
             moods.push({
                 index: i,
-                data: Math.round(Math.random() * 2 + 1),
+                data: {
+                    mood: Math.round(Math.random() * 2 + 1),
+                    userId: i,
+                    date: Date.now() + i
+                },
                 label: Date.now() + i,
             });
         }
@@ -62,14 +76,17 @@ export class NikoNikoComponent implements OnInit {
             });
         }
 
-        this.namesRows = [...rows].map(row => {
+        this.namesRows = [...rows].map((row, index) => {
             return {
                 ...row,
                 columns: [
                     {
                         index: 0,
                         label: row.label,
-                        data: row.label,
+                        data: {
+                            userId: row.columns[index].data.userId,
+                            name: row.label
+                        },
                     }
                 ]
             };
@@ -94,5 +111,17 @@ export class NikoNikoComponent implements OnInit {
             this.totalWidth = totalWidth;
             this.totalHeight = totalHeight;
         })
+    }
+
+    handleCellClick(cellValue) {
+        console.log('cell value', cellValue);
+    }
+
+    yAxisValueMapper(data) {
+        return data.name;
+    }
+
+    sheetValueMapper(data) {
+        return data.mood;
     }
 }

@@ -6,6 +6,7 @@ import {ITableDimensions} from '../model/tableDimensions.model';
 export class TableStateHolderService {
   matrix;
   dimensions;
+  valueMapper = data => data;
 
   setMatrix(matrix: ITableRow[]) {
     this.matrix = matrix;
@@ -29,5 +30,13 @@ export class TableStateHolderService {
 
   getYoffset(index: number) {
     return this.dimensions.cellHeight * index;
+  }
+
+  setValueMapper(func: (data) => string){
+    this.valueMapper = func;
+  }
+
+  getValueMapper(): (data) => string {
+    return this.valueMapper;
   }
 }

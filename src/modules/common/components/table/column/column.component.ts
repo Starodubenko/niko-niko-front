@@ -1,5 +1,6 @@
 import {Component, HostBinding, HostListener, Input, OnInit} from '@angular/core';
 import {TableStateHolderService} from '../service/tableStateHolder.service';
+import {TableEventsService} from "../service/tableEvents.service";
 
 @Component({
     selector: 'app-column',
@@ -15,9 +16,17 @@ export class ColumnComponent implements OnInit {
     @Input() index;
     @Input() data;
 
+    @HostListener('mouseover') // like an onClick once mouse up event happened
+    onMouseOver() {
+        this.tableEventsService.fireCellClick(this.data);
+    }
+
     columnOffset = 0;
 
-    constructor(private tableStateHolderService: TableStateHolderService) {
+    constructor(
+        private tableStateHolderService: TableStateHolderService,
+        private tableEventsService: TableEventsService
+    ) {
     }
 
     ngOnInit() {
@@ -28,5 +37,9 @@ export class ColumnComponent implements OnInit {
         this.left = this.tableStateHolderService.getXoffset(this.index);
 
         this.columnOffset = this.tableStateHolderService.getXoffset(this.index);
+    }
+
+    getData(): string {
+        return this.tableStateHolderService.getValueMapper()(this.data);
     }
 }
