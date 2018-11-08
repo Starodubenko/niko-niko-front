@@ -40,6 +40,7 @@
                 [viewWidth]="xWidth"
                 [viewHeight]="xHeight"
                 [useOwnScroll]="false"
+                [valueMapper]="xAxisValueMapper"
         ></app-virtual-static-cell-table>
     </div>
 </div>
@@ -47,7 +48,7 @@
         [viewHeight]="yHeight + xHeight"
         [viewWidth]="yWidth + xWidth"
         [scrollHeight]="totalHeight"
-        [scrollWidth]="totalWidth"
+        [scrollWidth]="totalWidth + yWidth"
         [scrollId]="12345"
         [onClickDisable]="true"
 >

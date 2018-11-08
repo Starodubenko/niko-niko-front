@@ -16,7 +16,7 @@ export class ColumnComponent implements OnInit {
     @Input() index;
     @Input() data;
 
-    @HostListener('mouseover') // like an onClick once mouse up event happened
+    @HostListener('mouseup') // like an onClick once mouse up event happened
     onMouseOver() {
         this.tableEventsService.fireCellClick(this.data);
     }

@@ -2,6 +2,7 @@ import {Component, HostBinding, HostListener, Inject, Input, OnInit} from '@angu
 import {DataProviderToken} from '../../common/services/dataProvider/constants';
 import {IDataProvider} from '../../common/services/dataProvider';
 import {ScrollService} from '../../common/components/scrollableContainer/service';
+import {INikoNikoData} from "./interface/nikoNikoData.interface";
 
 @Component({
     selector: 'app-niko-niko',
@@ -16,6 +17,7 @@ export class NikoNikoComponent implements OnInit {
     @Input() height;
     @Input() width;
     @Input() rowsCount = 10;
+    @Input() data: INikoNikoData;
 
     @HostBinding('style.height.px') hostHeight;
     @HostBinding('style.width.px') hostWidth;
@@ -25,7 +27,7 @@ export class NikoNikoComponent implements OnInit {
         this.scrollService.disableMasterScroll();
     }
 
-    @HostListener('mouseup')
+    @HostListener('click')
     onMouseUp() {
         this.scrollService.enableMasterScroll();
     }
@@ -53,56 +55,11 @@ export class NikoNikoComponent implements OnInit {
         this.xWidth = this.width - this.yWidth;
         this.yHeight = this.height - this.xHeight;
 
-        const rows = [];
-        const moods = [];
+        const {datesColumns, namesRows, matrixRows} = this.data;
 
-        for (let i = 0; i < 30; i++) {
-            moods.push({
-                index: i,
-                data: {
-                    mood: Math.round(Math.random() * 2 + 1),
-                    userId: i,
-                    date: Date.now() + i
-                },
-                label: Date.now() + i,
-            });
-        }
-
-        for (let i = 0; i < 30; i++) {
-            rows.push({
-                index: i,
-                label: 'teamMemberId_' + i,
-                columns: moods
-            });
-        }
-
-        this.namesRows = [...rows].map((row, index) => {
-            return {
-                ...row,
-                columns: [
-                    {
-                        index: 0,
-                        label: row.label,
-                        data: {
-                            userId: row.columns[index].data.userId,
-                            name: row.label
-                        },
-                    }
-                ]
-            };
-        });
-
-        this.matrixRows = [...rows];
-
-        const datesRow = {...rows[0]};
-        datesRow.columns = datesRow.columns.map(col => {
-            return {
-                index: col.index,
-                label: col.label,
-                data: new Date(col.label).toLocaleDateString(),
-            };
-        });
-        this.datesColumns = [datesRow];
+        this.namesRows = namesRows;
+        this.matrixRows = matrixRows;
+        this.datesColumns = datesColumns;
     }
 
     getTotalDimensions({totalWidth, totalHeight}) {
@@ -117,11 +74,15 @@ export class NikoNikoComponent implements OnInit {
         console.log('cell value', cellValue);
     }
 
+    xAxisValueMapper(data) {
+        return new Date(data.timestamp).toLocaleDateString();
+    }
+
     yAxisValueMapper(data) {
         return data.name;
     }
 
     sheetValueMapper(data) {
-        return data.mood;
+        return data.mood.value;
     }
 }

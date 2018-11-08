@@ -14,7 +14,7 @@ import {MetricsViewModule} from "../../components/metricsView";
     BrowserModule,
       DataProviderModule,
       NikoNikoModule,
-      MetricsViewModule,
+      MetricsViewModule
   ],
   exports: [
     NikoViewComponent
