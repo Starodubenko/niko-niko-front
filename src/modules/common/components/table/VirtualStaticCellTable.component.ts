@@ -1,9 +1,8 @@
-import {AfterViewInit, Component, EventEmitter, HostBinding, Input, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TableStateHolderService} from './service/tableStateHolder.service';
 import {calculateVisibleRows} from './service/helper';
 import {ScrollService} from '../scrollableContainer/service';
 import {ITableRow} from './model';
-import {TableEventsService} from "./service/tableEvents.service";
 
 @Component({
     selector: 'app-virtual-static-cell-table',
@@ -23,9 +22,10 @@ export class VirtualStaticCellTableComponent implements OnInit, AfterViewInit {
     @Input() tableName: string;
     @Input() useOwnScroll = true;
     @Input() valueMapper: (data) => any;
+    @Input() containerTemplate: any;
+    @Input() cellTemplate: any;
 
     @Output() totalTableDimensions = new EventEmitter();
-    @Output() onCellClick = new EventEmitter();
 
     cellWidth = 0;
     cellHeight = 0;
@@ -36,7 +36,6 @@ export class VirtualStaticCellTableComponent implements OnInit, AfterViewInit {
     constructor(
         private tableStateHolderService: TableStateHolderService,
         private scrollService: ScrollService,
-        private tableEventsService: TableEventsService
     ) {
     }
 
@@ -65,11 +64,6 @@ export class VirtualStaticCellTableComponent implements OnInit, AfterViewInit {
         this.scrollService.getScroll().subscribe(scroll => {
             this.selectedRows = this.getSelectedRows(scroll.target.scrollTop, this.cellHeight);
         });
-
-        this.tableEventsService.watchCellClick()
-            .subscribe(cellData => {
-                this.onCellClick.emit(cellData);
-            });
 
         if(this.valueMapper) {
             this.tableStateHolderService.setValueMapper(this.valueMapper);

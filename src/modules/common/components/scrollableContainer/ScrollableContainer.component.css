@@ -1,7 +1,17 @@
 :host {
+  display: flex;
+}
+
+.ScrollableContainer {
   position: relative;
   overflow: auto;
   display: flex;
+  flex-grow: 1;
+}
+
+.ScrollableContainer.WithoutScroll {
+  margin-right: -10px;
+  margin-bottom: -10px;
 }
 
 .Container-with-holder {

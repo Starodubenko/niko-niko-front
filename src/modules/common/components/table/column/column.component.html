@@ -1,1 +1,9 @@
-{{getData()}}
+<ng-template #containerDefaultTemplate let-content="dataToShow">
+    <div class="DefaultCell">
+        {{content}}
+    </div>
+</ng-template>
+
+<ng-container [ngTemplateOutlet]="cellTemplate || containerDefaultTemplate"
+              [ngTemplateOutletContext]="{dataToShow: getDataToShow(), allData: data}">
+</ng-container>

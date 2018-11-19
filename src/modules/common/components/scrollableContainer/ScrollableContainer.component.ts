@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostBinding, HostListener, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, HostBinding, Input, OnInit, ViewChild} from '@angular/core';
 import {ScrollService} from './service';
 
 @Component({
@@ -13,38 +13,35 @@ export class ScrollableContainerComponent implements OnInit {
     @Input() scrollWidth = 0;
     @Input() scrollId;
     @Input() useOwnScroll = true;
-    @Input() onClickDisable = false;
+    @Input() containerTemplate = false;
+
+    @ViewChild('scrollableView') scrollableView;
 
     @HostBinding('style.height.px') height = 0;
     @HostBinding('style.width.px') width = 0;
-    @HostBinding('style.display') pe = 'block';
+    @HostBinding('style.display') pe = 'flex';
 
-    constructor(private elRef: ElementRef,
-                private scrollService: ScrollService) {
+    constructor(private scrollService: ScrollService) {
     }
 
     ngOnInit() {
         this.height = this.viewHeight;
         this.width = this.viewWidth;
 
-        if (this.onClickDisable) {
-            this.scrollService.isDisableMasterScroll().subscribe(isDisable => {
-                this.pe = isDisable ? 'none' : 'block';
-            });
-        }
-
-        if (this.useOwnScroll) {
-            this.elRef.nativeElement.addEventListener('scroll', (event) => {
-                this.scrollService.setScroll(event, this.scrollId);
-            });
-        }
-
         if (!this.useOwnScroll) {
             this.scrollService.getScrollChanges()
                 .subscribe(({scroll}) => {
-                    this.elRef.nativeElement.scrollLeft = scroll.target.scrollLeft;
-                    this.elRef.nativeElement.scrollTop = scroll.target.scrollTop;
+                    console.log(this.scrollId);
+                    this.scrollableView.nativeElement.scrollLeft = scroll.target.scrollLeft;
+                    this.scrollableView.nativeElement.scrollTop = scroll.target.scrollTop;
                 });
+        }
+    }
+
+    onScroll() {
+        if (this.useOwnScroll) {
+            console.log(this.scrollId);
+            this.scrollService.setScroll(event, this.scrollId);
         }
     }
 }

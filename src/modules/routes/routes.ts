@@ -6,6 +6,6 @@ import {NotFoundViewComponent} from "../views/notFound";
 export const routes: Route[] = [
     { path: 'calendar', component: NikoViewComponent },
     { path: 'login', component: LoginViewComponent },
-    { path: '',   redirectTo: '/login', pathMatch: 'full' },
+    { path: '',   redirectTo: '/calendar', pathMatch: 'full' },
     { path: '**', component: NotFoundViewComponent }
 ];

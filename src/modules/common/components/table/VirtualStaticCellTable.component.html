@@ -1,11 +1,13 @@
 <app-scrollable-container
-  [viewHeight]="viewHeight"
-  [viewWidth]="viewWidth"
-  [scrollId]="tableName"
-  [useOwnScroll]="useOwnScroll"
+        [viewHeight]="viewHeight"
+        [viewWidth]="viewWidth"
+        [scrollId]="tableName"
+        [useOwnScroll]="useOwnScroll"
+        [containerTemplate]="containerTemplate"
 >
-  <app-row
-    *ngFor="let row of selectedRows; trackBy: trackById"
-    [index]="row.index"
-  ></app-row>
+    <app-row
+            *ngFor="let row of selectedRows; trackBy: trackById"
+            [index]="row.index"
+            [cellTemplate]="cellTemplate"
+    ></app-row>
 </app-scrollable-container>

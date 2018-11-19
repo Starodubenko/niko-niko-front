@@ -4,18 +4,21 @@ import {NgModule} from '@angular/core';
 import {NikoNikoComponent} from './NikoNiko.component';
 import {VirtualStaticCellTableModule} from '../../common/components/table';
 import {ScrollableContainerModule} from '../../common/components/scrollableContainer';
+import {ClickableCellComponent} from "./ClickableCell/ClickableCell.component";
 
 @NgModule({
-  declarations: [
-    NikoNikoComponent,
-  ],
-  imports: [
-    BrowserModule,
-    VirtualStaticCellTableModule,
-    ScrollableContainerModule
-  ],
-  exports: [
-    NikoNikoComponent
-  ]
+    declarations: [
+        NikoNikoComponent,
+        ClickableCellComponent
+    ],
+    imports: [
+        BrowserModule,
+        VirtualStaticCellTableModule,
+        ScrollableContainerModule
+    ],
+    exports: [
+        NikoNikoComponent
+    ]
 })
-export class NikoNikoModule { }
+export class NikoNikoModule {
+}

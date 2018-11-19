@@ -1,55 +1,73 @@
-<div class="NikoNiko-sheet-container"
-     [style.height.px]="yHeight">
-    <div class="NikoNiko-teammates NikoNiko-teammates-width-holder">
-        <app-virtual-static-cell-table
-                [tableName]="'yAxis'"
-                [rows]="namesRows"
-                [visibleRows]="rowsCount"
-                [visibleColumns]="1"
-                [viewWidth]="yWidth"
-                [viewHeight]="yHeight"
-                [useOwnScroll]="false"
-                [valueMapper]="yAxisValueMapper"
-        ></app-virtual-static-cell-table>
-    </div>
-    <div class="NikoNiko-sheet">
-        <app-virtual-static-cell-table
-                [tableName]="'sheet'"
-                [rows]="matrixRows"
-                [visibleRows]="rowsCount"
-                [visibleColumns]="rowsCount"
-                [viewWidth]="xWidth"
-                [viewHeight]="yHeight"
-                [useOwnScroll]="false"
-                [valueMapper]="sheetValueMapper"
-                (totalTableDimensions)="getTotalDimensions($event)"
-                (onCellClick)="handleCellClick($event)"
-        ></app-virtual-static-cell-table>
-    </div>
-</div>
-<div class="NikoNiko-dates-container">
-    <div class="NikoNiko-teammates-width-holder"
-         [style.width.px]="yWidth"
-    ></div>
-    <div class="NikoNiko-dates">
-        <app-virtual-static-cell-table
-                [tableName]="'xAxis'"
-                [rows]="datesColumns"
-                [visibleRows]="1"
-                [visibleColumns]="rowsCount"
-                [viewWidth]="xWidth"
-                [viewHeight]="xHeight"
-                [useOwnScroll]="false"
-                [valueMapper]="xAxisValueMapper"
-        ></app-virtual-static-cell-table>
-    </div>
-</div>
 <app-scrollable-container
         [viewHeight]="yHeight + xHeight"
         [viewWidth]="yWidth + xWidth"
         [scrollHeight]="totalHeight"
         [scrollWidth]="totalWidth + yWidth"
         [scrollId]="12345"
-        [onClickDisable]="true"
 >
 </app-scrollable-container>
+
+<div class="NikoNiko-container"
+     [style.height.px]="height"
+     [style.pointer-events]="pointerEvents">
+    <div class="NikoNiko-sheet-container"
+         [style.height.px]="yHeight">
+        <div class="NikoNiko-teammates NikoNiko-teammates-width-holder">
+            <app-virtual-static-cell-table
+                    [tableName]="'yAxis'"
+                    [rows]="namesRows"
+                    [visibleRows]="rowsCount"
+                    [visibleColumns]="1"
+                    [viewWidth]="yWidth"
+                    [viewHeight]="yHeight"
+                    [useOwnScroll]="false"
+                    [valueMapper]="yAxisValueMapper"
+            ></app-virtual-static-cell-table>
+        </div>
+        <div class="NikoNiko-sheet">
+            <app-virtual-static-cell-table
+                    [tableName]="'sheet'"
+                    [rows]="matrixRows"
+                    [visibleRows]="rowsCount"
+                    [visibleColumns]="rowsCount"
+                    [viewWidth]="xWidth"
+                    [viewHeight]="yHeight"
+                    [useOwnScroll]="false"
+                    [valueMapper]="sheetValueMapper"
+                    (totalTableDimensions)="getTotalDimensions($event)"
+                    [containerTemplate]="containerTemplate"
+                    [cellTemplate]="cellTemplate"
+            ></app-virtual-static-cell-table>
+        </div>
+    </div>
+    <div class="NikoNiko-dates-container">
+        <div class="NikoNiko-teammates-width-holder"
+             [style.width.px]="yWidth"
+        ></div>
+        <div class="NikoNiko-dates">
+            <app-virtual-static-cell-table
+                    [tableName]="'xAxis'"
+                    [rows]="datesColumns"
+                    [visibleRows]="1"
+                    [visibleColumns]="rowsCount"
+                    [viewWidth]="xWidth"
+                    [viewHeight]="xHeight"
+                    [useOwnScroll]="false"
+                    [valueMapper]="xAxisValueMapper"
+            ></app-virtual-static-cell-table>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #containerTemplate let-content="data">
+    <div class="CustomContainer">
+        <ng-container [ngTemplateOutlet]="content"></ng-container>
+    </div>
+</ng-template>
+
+<ng-template #cellTemplate let-content="dataToShow" let-allData="allData">
+    <app-clickable-cell [contentToShow]="content"
+                        [allData]="allData">
+    </app-clickable-cell>
+</ng-template>

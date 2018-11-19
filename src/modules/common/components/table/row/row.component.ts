@@ -16,6 +16,7 @@ export class RowComponent implements OnInit {
   @HostBinding('style.top.px') top = 0;
 
   @Input() index;
+  @Input() cellTemplate: any;
 
   selectedColumns: ITableColumn[] = [];
 

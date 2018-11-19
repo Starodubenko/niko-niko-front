@@ -24,13 +24,17 @@ export class NikoNikoComponent implements OnInit {
 
     @HostListener('mousedown')
     onMouseDown() {
-        this.scrollService.disableMasterScroll();
+        this.pointerEvents = 'auto';
+        console.log(this.pointerEvents);
     }
 
     @HostListener('click')
     onMouseUp() {
-        this.scrollService.enableMasterScroll();
+        this.pointerEvents = 'none';
+        console.log(this.pointerEvents);
     }
+
+    pointerEvents = 'none';
 
     yWidth = 200;
     yHeight;
@@ -44,8 +48,7 @@ export class NikoNikoComponent implements OnInit {
     matrixRows = [];
     datesColumns = [];
 
-    constructor(@Inject(DataProviderToken) private dataProvider: IDataProvider,
-                private scrollService: ScrollService) {
+    constructor(@Inject(DataProviderToken) private dataProvider: IDataProvider) {
     }
 
     ngOnInit() {
@@ -68,10 +71,6 @@ export class NikoNikoComponent implements OnInit {
             this.totalWidth = totalWidth;
             this.totalHeight = totalHeight;
         })
-    }
-
-    handleCellClick(cellValue) {
-        console.log('cell value', cellValue);
     }
 
     xAxisValueMapper(data) {

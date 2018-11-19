@@ -15,6 +15,7 @@ export class ColumnComponent implements OnInit {
 
     @Input() index;
     @Input() data;
+    @Input() cellTemplate: any;
 
     @HostListener('mouseup') // like an onClick once mouse up event happened
     onMouseOver() {
@@ -39,7 +40,7 @@ export class ColumnComponent implements OnInit {
         this.columnOffset = this.tableStateHolderService.getXoffset(this.index);
     }
 
-    getData(): string {
+    getDataToShow(): string {
         return this.tableStateHolderService.getValueMapper()(this.data);
     }
 }

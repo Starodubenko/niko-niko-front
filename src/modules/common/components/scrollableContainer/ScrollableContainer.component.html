@@ -1,5 +1,20 @@
-<div class="Container-with-holder"
-     [style.width.px]="scrollWidth"
-     [style.height.px]="scrollHeight">
-</div>
-<ng-content></ng-content>
+<ng-template #containerDefaultTemplate let-content="data">
+    <!--<div>-->
+        <ng-container [ngTemplateOutlet]="content"></ng-container>
+    <!--</div>-->
+</ng-template>
+
+<ng-template #contentTemplate>
+    <div #scrollableView class="ScrollableContainer" [class.WithoutScroll]="!useOwnScroll" (scroll)="onScroll()">
+        <div class="Container-with-holder"
+             [style.width.px]="scrollWidth"
+             [style.height.px]="scrollHeight">
+        </div>
+        <ng-content></ng-content>
+    </div>
+</ng-template>
+
+
+<ng-container [ngTemplateOutlet]="containerTemplate || containerDefaultTemplate"
+              [ngTemplateOutletContext]="{data: contentTemplate}">
+</ng-container>
