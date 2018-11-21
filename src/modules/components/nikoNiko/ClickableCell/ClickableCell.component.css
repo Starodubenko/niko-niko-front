@@ -1,7 +1,11 @@
 :host {
-  border: 2px solid #0008ff;
+  border: 1px solid #0008ff;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+}
+
+:host:hover {
+  background-color: green;
 }

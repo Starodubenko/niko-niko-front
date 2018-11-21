@@ -13,6 +13,8 @@ export class ScrollableContainerComponent implements OnInit {
     @Input() scrollWidth = 0;
     @Input() scrollId;
     @Input() useOwnScroll = true;
+    @Input() hiddenScroll = false;
+    @Input() disableScroll = false;
     @Input() containerTemplate = false;
 
     @ViewChild('scrollableView') scrollableView;
@@ -20,6 +22,7 @@ export class ScrollableContainerComponent implements OnInit {
     @HostBinding('style.height.px') height = 0;
     @HostBinding('style.width.px') width = 0;
     @HostBinding('style.display') pe = 'flex';
+    @HostBinding('style.overflow') overflow = 'none';
 
     constructor(private scrollService: ScrollService) {
     }
@@ -27,11 +30,11 @@ export class ScrollableContainerComponent implements OnInit {
     ngOnInit() {
         this.height = this.viewHeight;
         this.width = this.viewWidth;
+        this.overflow = this.hiddenScroll && 'auto';
 
         if (!this.useOwnScroll) {
             this.scrollService.getScrollChanges()
                 .subscribe(({scroll}) => {
-                    console.log(this.scrollId);
                     this.scrollableView.nativeElement.scrollLeft = scroll.target.scrollLeft;
                     this.scrollableView.nativeElement.scrollTop = scroll.target.scrollTop;
                 });
@@ -40,7 +43,6 @@ export class ScrollableContainerComponent implements OnInit {
 
     onScroll() {
         if (this.useOwnScroll) {
-            console.log(this.scrollId);
             this.scrollService.setScroll(event, this.scrollId);
         }
     }

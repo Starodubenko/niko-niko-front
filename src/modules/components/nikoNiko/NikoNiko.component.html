@@ -3,6 +3,7 @@
         [viewWidth]="yWidth + xWidth"
         [scrollHeight]="totalHeight"
         [scrollWidth]="totalWidth + yWidth"
+        [hiddenScroll]="true"
         [scrollId]="12345"
 >
 </app-scrollable-container>
@@ -16,7 +17,7 @@
             <app-virtual-static-cell-table
                     [tableName]="'yAxis'"
                     [rows]="namesRows"
-                    [visibleRows]="rowsCount"
+                    [visibleRows]="cellsCount.rows"
                     [visibleColumns]="1"
                     [viewWidth]="yWidth"
                     [viewHeight]="yHeight"
@@ -28,11 +29,12 @@
             <app-virtual-static-cell-table
                     [tableName]="'sheet'"
                     [rows]="matrixRows"
-                    [visibleRows]="rowsCount"
-                    [visibleColumns]="rowsCount"
+                    [visibleRows]="cellsCount.rows"
+                    [visibleColumns]="cellsCount.cols"
                     [viewWidth]="xWidth"
                     [viewHeight]="yHeight"
                     [useOwnScroll]="false"
+                    [disableScroll]="true"
                     [valueMapper]="sheetValueMapper"
                     (totalTableDimensions)="getTotalDimensions($event)"
                     [containerTemplate]="containerTemplate"
@@ -49,7 +51,7 @@
                     [tableName]="'xAxis'"
                     [rows]="datesColumns"
                     [visibleRows]="1"
-                    [visibleColumns]="rowsCount"
+                    [visibleColumns]="cellsCount.cols"
                     [viewWidth]="xWidth"
                     [viewHeight]="xHeight"
                     [useOwnScroll]="false"
@@ -58,7 +60,6 @@
         </div>
     </div>
 </div>
-
 
 <ng-template #containerTemplate let-content="data">
     <div class="CustomContainer">

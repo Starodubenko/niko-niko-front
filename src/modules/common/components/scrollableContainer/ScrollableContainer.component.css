@@ -1,19 +1,29 @@
 :host {
-  display: flex;
+    display: flex;
+}
+
+.DefaultContainer {
+    overflow: hidden;
+    display: flex;
+    flex-grow: 1;
 }
 
 .ScrollableContainer {
-  position: relative;
-  overflow: auto;
-  display: flex;
-  flex-grow: 1;
+    position: relative;
+    overflow: auto;
+    display: flex;
+    flex-grow: 1;
 }
 
 .ScrollableContainer.WithoutScroll {
-  margin-right: -10px;
-  margin-bottom: -10px;
+    margin-right: -15px;
+    margin-bottom: -15px;
+}
+
+.ScrollableContainer.DisableScroll {
+    overflow: hidden;
 }
 
 .Container-with-holder {
-  position: absolute;
+    position: absolute;
 }

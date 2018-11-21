@@ -1,11 +1,15 @@
 <ng-template #containerDefaultTemplate let-content="data">
-    <!--<div>-->
+    <div class="DefaultContainer">
         <ng-container [ngTemplateOutlet]="content"></ng-container>
-    <!--</div>-->
+    </div>
 </ng-template>
 
 <ng-template #contentTemplate>
-    <div #scrollableView class="ScrollableContainer" [class.WithoutScroll]="!useOwnScroll" (scroll)="onScroll()">
+    <div #scrollableView
+         class="ScrollableContainer"
+         [class.WithoutScroll]="!useOwnScroll || hiddenScroll"
+         [class.DisableScroll]="disableScroll"
+         (scroll)="onScroll()">
         <div class="Container-with-holder"
              [style.width.px]="scrollWidth"
              [style.height.px]="scrollHeight">

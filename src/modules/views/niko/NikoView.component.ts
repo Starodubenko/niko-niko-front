@@ -11,6 +11,7 @@ export class NikoViewComponent implements OnInit {
 
     teammates = [];
     nikoNikoData = {};
+    cellsCount = {rows: 5, cols: 10};
 
     constructor(private apiTeammateService: ApiTeammateService) {
     }

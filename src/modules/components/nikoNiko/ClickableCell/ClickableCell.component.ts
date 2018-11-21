@@ -1,4 +1,4 @@
-import {Component, HostListener, Input, OnInit} from '@angular/core';
+import {Component, HostBinding, HostListener, Input, OnInit} from '@angular/core';
 
 @Component({
     selector: 'app-clickable-cell',
@@ -9,8 +9,10 @@ export class ClickableCellComponent implements OnInit {
     @Input() contentToShow;
     @Input() allData;
 
-    @HostListener('mouseup') // like an onClick once mouse up event happened
-    onMouseOver() {
+    @HostBinding('style.pointer-events') pe = 'auto';
+
+    @HostListener('click')
+    onClick() {
         console.log(this.allData);
     }
 

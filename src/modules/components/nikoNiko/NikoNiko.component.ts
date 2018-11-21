@@ -1,4 +1,4 @@
-import {Component, HostBinding, HostListener, Inject, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, HostBinding, Inject, Input, OnInit, ViewChild} from '@angular/core';
 import {DataProviderToken} from '../../common/services/dataProvider/constants';
 import {IDataProvider} from '../../common/services/dataProvider';
 import {ScrollService} from '../../common/components/scrollableContainer/service';
@@ -16,23 +16,14 @@ export class NikoNikoComponent implements OnInit {
 
     @Input() height;
     @Input() width;
-    @Input() rowsCount = 10;
+    @Input() cellsCount = {rows: 0, cols: 0};
+    @Input() cellsDimensions = {width: 0, height: 0};
     @Input() data: INikoNikoData;
 
     @HostBinding('style.height.px') hostHeight;
     @HostBinding('style.width.px') hostWidth;
 
-    @HostListener('mousedown')
-    onMouseDown() {
-        this.pointerEvents = 'auto';
-        console.log(this.pointerEvents);
-    }
-
-    @HostListener('click')
-    onMouseUp() {
-        this.pointerEvents = 'none';
-        console.log(this.pointerEvents);
-    }
+    @ViewChild('nikoNiko') nikoNiko;
 
     pointerEvents = 'none';
 
@@ -48,7 +39,8 @@ export class NikoNikoComponent implements OnInit {
     matrixRows = [];
     datesColumns = [];
 
-    constructor(@Inject(DataProviderToken) private dataProvider: IDataProvider) {
+    constructor(private elementRef: ElementRef,
+        @Inject(DataProviderToken) private dataProvider: IDataProvider) {
     }
 
     ngOnInit() {

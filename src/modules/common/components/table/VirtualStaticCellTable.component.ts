@@ -21,6 +21,7 @@ export class VirtualStaticCellTableComponent implements OnInit, AfterViewInit {
     @Input() viewHeight: number;
     @Input() tableName: string;
     @Input() useOwnScroll = true;
+    @Input() disableScroll = true;
     @Input() valueMapper: (data) => any;
     @Input() containerTemplate: any;
     @Input() cellTemplate: any;
