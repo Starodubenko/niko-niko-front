@@ -43,6 +43,12 @@
   bottom: 0;
 }
 
+.NikoNiko-horizontal-scroll {
+    height: 50px;
+    width: 100%;
+    background-color: red;
+}
+
 .CustomContainer {
   overflow: hidden;
   border: 2px solid red;

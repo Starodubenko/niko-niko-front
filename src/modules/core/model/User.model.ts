@@ -1,0 +1,6 @@
+export class User {
+    id: string;
+    name: string;
+    surname: string;
+    team: string;
+}

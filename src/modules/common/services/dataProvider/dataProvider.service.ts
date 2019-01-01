@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {MetricsView} from '../../constants';
 import {BehaviorSubject, Subject} from 'rxjs';
-import {DateInterval} from '../../model';
 import {IDataProvider} from './DataProvider.interface';
-import {ITeammateDto} from '../../../api/model';
+import {MetricsView} from '../../constants';
+import {DateInterval} from "../../../core/model";
+import {ITeammateDto} from "../../../core/dto";
 
 @Injectable()
 export class DataProviderService implements IDataProvider {

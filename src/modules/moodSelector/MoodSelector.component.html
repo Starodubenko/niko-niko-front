@@ -1,0 +1,11 @@
+<app-mood-item *ngIf="isVisible(moodType.BAD)"
+               [mood]="moodType.BAD"
+               (click)="onMoodClick(moodType.BAD)"
+></app-mood-item>
+<app-mood-item *ngIf="isVisible(moodType.NEUTRAL)"
+               [mood]="moodType.NEUTRAL"
+               (click)="onMoodClick(moodType.NEUTRAL)"
+></app-mood-item>
+<app-mood-item *ngIf="isVisible(moodType.GOOD)"
+               (click)="onMoodClick(moodType.GOOD)"
+               [mood]="moodType.GOOD"></app-mood-item>

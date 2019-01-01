@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ITeamDto, ITeammateDto, TeamDto} from './model';
+import {ITeamDto, ITeammateDto, TeamDto} from "../../core/dto";
 
 const generateMood = (index) => {
   return {
@@ -18,7 +18,7 @@ const generateMoods = (count) => {
   return result;
 };
 
-const data = {
+export const teammateData = {
   employees: {
     '1': {
       id: '1',
@@ -60,19 +60,19 @@ const data = {
 export class ApiTeammateService {
 
   getById(employeeId: string): ITeammateDto {
-    return data.employees[employeeId];
+    return teammateData.employees[employeeId];
   }
 
   getAllInTeam(teamId: string): ITeamDto {
-    const dto = data.teams[teamId];
+    const dto = teammateData.teams[teamId];
     const teammates = dto.teammates.map(employeeId => {
-      return data.employees[employeeId];
+      return teammateData.employees[employeeId];
     });
 
     return new TeamDto(teammates, dto.id, dto.title);
   }
 
   getAll(): ITeammateDto[] {
-    return Object.values(data.employees);
+    return Object.values(teammateData.employees);
   }
 }

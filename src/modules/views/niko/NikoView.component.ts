@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiTeammateService} from "../../api";
-import {nikoNikoDataConverter} from "../../adapter";
+import {nikoNikoDataConverter} from "../../core/adapter";
 
 @Component({
     selector: 'app-niko-view',

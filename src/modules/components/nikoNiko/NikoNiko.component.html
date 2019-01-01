@@ -1,12 +1,14 @@
-<app-scrollable-container
-        [viewHeight]="yHeight + xHeight"
-        [viewWidth]="yWidth + xWidth"
-        [scrollHeight]="totalHeight"
-        [scrollWidth]="totalWidth + yWidth"
-        [hiddenScroll]="true"
-        [scrollId]="12345"
->
-</app-scrollable-container>
+<div class="NikoNiko-horizontal-scroll">
+    <app-scrollable-container
+            [viewHeight]="yHeight + xHeight"
+            [viewWidth]="yWidth + xWidth"
+            [scrollHeight]="totalHeight"
+            [scrollWidth]="totalWidth + yWidth"
+            [hiddenScroll]="true"
+            [scrollId]="12345"
+    >
+    </app-scrollable-container>
+</div>
 
 <div class="NikoNiko-container"
      [style.height.px]="height"

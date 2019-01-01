@@ -1,7 +1,7 @@
 import {BehaviorSubject, Subject} from 'rxjs';
 import {MetricsView} from '../../constants';
-import {DateInterval} from '../../model';
-import {ITeammateDto} from '../../../api/model';
+import {DateInterval} from "../../../core/model";
+import {ITeammateDto} from "../../../core/dto";
 
 export interface IDataProvider {
   interval$: BehaviorSubject<DateInterval>;

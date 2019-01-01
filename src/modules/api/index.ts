@@ -1,2 +1,2 @@
 export * from './Api.module';
-export * from './apiTeammate.sevice';
+export * from './services/apiTeammate.sevice';

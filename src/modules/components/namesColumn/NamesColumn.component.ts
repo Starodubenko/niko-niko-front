@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {DataProviderToken} from '../../common/services/dataProvider/constants';
 import {IDataProvider} from '../../common/services/dataProvider';
-import {ITeammateDto} from '../../api/model';
+import {ITeammateDto} from "../../core/dto";
 
 @Component({
   selector: 'app-metrics-view',

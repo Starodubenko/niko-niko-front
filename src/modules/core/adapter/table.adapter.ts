@@ -1,5 +1,5 @@
-import {ITeammateDto} from "../api/model";
-import {INikoNikoData} from "../components/nikoNiko/interface/nikoNikoData.interface";
+import {ITeammateDto} from "../dto";
+import {INikoNikoData} from "../../components/nikoNiko/interface/nikoNikoData.interface";
 
 export const nikoNikoDataConverter = (data: ITeammateDto[]): INikoNikoData => {
     const rows = calculateNikoNikoMatrix(data);

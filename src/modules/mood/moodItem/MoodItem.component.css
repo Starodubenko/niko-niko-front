@@ -1,0 +1,15 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  background-color: red;
+  width: 280px;
+  height: 280px;
+  margin: 10px;
+}
+
+.not-selected-mood {
+  cursor: pointer;
+}
+
