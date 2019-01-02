@@ -37,7 +37,7 @@ export class MoodService {
     }
 
     selectMood(moodLevel: string) {
-        this.moodSocket.emit('currentOwnMoodLevel', {
+        this.moodSocket.emit('selectCurrentMood', {
             moodLevel: moodLevel,
             userId: '1'
         });

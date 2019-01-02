@@ -28,7 +28,6 @@ export class MoodSelectorComponent implements OnInit {
     ngOnInit() {
         this.moodSelectorService.currentMood()
             .subscribe(moodLevel => {
-                debugger;
                 this.currentMoodLevel = moodLevel;
             });
     }
