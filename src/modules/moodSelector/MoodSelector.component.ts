@@ -13,6 +13,7 @@ import {MoodType} from "../mood/constants";
 export class MoodSelectorComponent implements OnInit {
 
     moodType =  MoodType;
+    isLoading = false;
     currentMoodLevel = null;
 
     constructor(private moodSelectorService: MoodSelectorService) {}
@@ -22,13 +23,15 @@ export class MoodSelectorComponent implements OnInit {
     }
 
     isVisible(moodLevel: string) {
-        return !this.currentMoodLevel || this.currentMoodLevel === moodLevel;
+        return !this.isLoading && (!this.currentMoodLevel || this.currentMoodLevel === moodLevel);
     }
 
     ngOnInit() {
+        this.isLoading = true;
         this.moodSelectorService.currentMood()
             .subscribe(moodLevel => {
                 this.currentMoodLevel = moodLevel;
+                this.isLoading = false;
             });
     }
 }
