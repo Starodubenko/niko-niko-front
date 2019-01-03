@@ -35,9 +35,12 @@ export class ApiMoodService {
     }
 
     currentMoodConnection(): SocketIOClient.Socket {
+        const token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjpudWxsLCJpYXQiOjE1NDY0NDUwOTB9.h9SK0GGTAQVMihqRN8pY-cRftsM6mXkiDDLtlMXhPsc';
+
         return io('http://127.0.0.1:3000/mood', {
             query: {
-                userId: 1
+                userId: 1,
+                token
             }
         });
     }
