@@ -33,6 +33,11 @@ export class AuthService {
 
     checkUrlPathAccessibility(path: string): Observable<boolean> {
         const token = BrowserStorageHelper.getAuthToken();
+        const isUnauthorizedPage = !!path.split('/').find(item => item === 'unauthorized');
+
+        if (token && isUnauthorizedPage) {
+            return of(false);
+        }
 
         return this.http.post<boolean>('/api/auth/checkUrlPathAccessibility', {
             token,

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {Router} from "@angular/router";
 import {AuthService} from "../../service";
 
 enum FormFieldNames {
@@ -9,7 +10,7 @@ enum FormFieldNames {
 }
 
 @Component({
-    selector: 'app-sign-in',
+    selector: 'app-sign-in-form',
     templateUrl: './SignInForm.component.html',
     styleUrls: ['./SignInForm.css'],
 })
@@ -20,7 +21,8 @@ export class SignInFormComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
-        private authService: AuthService) {
+        private authService: AuthService,
+        private router: Router) {
     }
 
     ngOnInit(): void {
@@ -38,6 +40,8 @@ export class SignInFormComponent implements OnInit {
             formValue[FormFieldNames.Username],
             formValue[FormFieldNames.Password],
             formValue[FormFieldNames.RememberMe]
-        ).subscribe(_ => _);
+        ).subscribe(() => {
+            this.router.navigate(['main'])
+        });
     }
 }
