@@ -1,0 +1,14 @@
+<form [formGroup]="form">
+    <div class="SignIn-username">
+        <input type="text" [formControlName]="formFieldNames.Username">
+    </div>
+    <div class="SignIn-password">
+        <input type="password" [formControlName]="formFieldNames.Password">
+    </div>
+    <div class="SignIn-rememberme">
+        <input type="checkbox" [formControlName]="formFieldNames.RememberMe">
+    </div>
+    <div class="SignIn-signIn">
+        <button (click)="submit()">Submit</button>
+    </div>
+</form>

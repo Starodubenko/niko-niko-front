@@ -9,16 +9,15 @@ export class AuthService {
 
     constructor(private readonly http: HttpClient) {}
 
-    signIn(username: string, password: string, rememberMe: boolean): Observable<string> {  //token in response
+    signIn(username: string, password: string, rememberMe: boolean): Observable<string> {
         return this.http.post<string>('/api/auth/signIn', {
             username,
             password
         }).pipe(
-            tap(token => {
-                BrowserStorageHelper.setAuthToken(token, rememberMe)
+            tap((data: any) => {
+                BrowserStorageHelper.setAuthToken(data.token, rememberMe)
             }),
             catchError((e: any) => {
-                console.log(e);
                 return of(e);
             })
         );

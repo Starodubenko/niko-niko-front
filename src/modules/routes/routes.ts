@@ -8,7 +8,7 @@ import {AuthGuard} from "../auth/guard";
 export const routes: Route[] = [
     { path: 'main', component: MainViewComponent, canActivate: [AuthGuard]},
     { path: 'calendar', component: NikoViewComponent },
-    { path: 'login', component: UnauthorizedViewComponent },
+    { path: 'unauthorized', component: UnauthorizedViewComponent },
     { path: '',   redirectTo: '/main', pathMatch: 'full' },
     { path: '**', component: NotFoundViewComponent }
 ];
