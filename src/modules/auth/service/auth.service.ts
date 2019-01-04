@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Observable, of} from "rxjs";
 import {catchError, map, tap} from "rxjs/operators";
 import jwtdecode from "jwt-decode";
+import {Router} from "@angular/router";
 import {BrowserStorageHelper} from "../utils";
 import {UserDto} from "../../core/dto";
 
@@ -10,9 +11,18 @@ import {UserDto} from "../../core/dto";
 export class AuthService {
 
     storageChanges$: BehaviorSubject<string>;
+    storageWatcher;
 
-    constructor(private readonly http: HttpClient) {
+    constructor(private readonly http: HttpClient,
+                private readonly router: Router) {
         this.storageChanges$ = new BehaviorSubject(BrowserStorageHelper.getAuthToken());
+
+        this.storageWatcher = setInterval(() => {
+            if(!BrowserStorageHelper.getAuthToken()) {
+                this.storageChanges$.next(null);
+                router.navigate(['unauthorized']);
+            }
+        }, 500);
     }
 
     signIn(username: string, password: string, rememberMe: boolean): Observable<string> {
