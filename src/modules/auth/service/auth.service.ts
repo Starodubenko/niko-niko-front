@@ -1,7 +1,8 @@
 import {Injectable} from "@angular/core";
-import {Observable, of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
+import {Observable, of} from "rxjs";
 import {catchError, tap} from "rxjs/operators";
+import jwtdecode from "jwt-decode";
 import {BrowserStorageHelper} from "../utils";
 
 @Injectable()
@@ -43,5 +44,9 @@ export class AuthService {
             token,
             path
         });
+    }
+
+    getUserInfo() {
+        return jwtdecode(BrowserStorageHelper.getAuthToken()).data;
     }
 }
