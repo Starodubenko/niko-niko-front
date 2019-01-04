@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {Observable, of} from "rxjs";
-import {catchError, tap} from "rxjs/operators";
+import {BehaviorSubject, Observable, of} from "rxjs";
+import {catchError, map, tap} from "rxjs/operators";
 import jwtdecode from "jwt-decode";
 import {BrowserStorageHelper} from "../utils";
 import {UserDto} from "../../core/dto";
@@ -9,7 +9,11 @@ import {UserDto} from "../../core/dto";
 @Injectable()
 export class AuthService {
 
-    constructor(private readonly http: HttpClient) {}
+    storageChanges$: BehaviorSubject<string>;
+
+    constructor(private readonly http: HttpClient) {
+        this.storageChanges$ = new BehaviorSubject(BrowserStorageHelper.getAuthToken());
+    }
 
     signIn(username: string, password: string, rememberMe: boolean): Observable<string> {
         return this.http.post<string>('/api/auth/signIn', {
@@ -19,7 +23,8 @@ export class AuthService {
             tap((data: any) => {
                 const bearerToken = `Bearer ${data.token}`;
 
-                BrowserStorageHelper.setAuthToken(bearerToken, rememberMe)
+                BrowserStorageHelper.setAuthToken(bearerToken, rememberMe);
+                this.storageChanges$.next(bearerToken);
             }),
             catchError((e: any) => {
                 return of(e);
@@ -28,6 +33,7 @@ export class AuthService {
     }
 
     signOut() {
+        this.storageChanges$.next(null);
         BrowserStorageHelper.removeAuthToken();
     }
 
@@ -47,6 +53,11 @@ export class AuthService {
             token,
             path
         });
+    }
+
+    getUserInfo$(): Observable<UserDto> {
+        return this.storageChanges$
+            .pipe(map(token => token ? jwtdecode(token).data : null));
     }
 
     getUserInfo(): UserDto | null {

@@ -10,7 +10,7 @@ import {AuthModule} from "../../auth";
     ],
     imports: [
         BrowserModule,
-        AuthModule
+        AuthModule,
     ],
     exports: [
         UnauthorizedViewComponent

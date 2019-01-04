@@ -13,8 +13,8 @@ import {AuthModule} from "../modules/auth";
     imports: [
         BrowserModule,
         ApiModule,
-        AppRoutingModule,
-        AuthModule
+        AuthModule,
+        AppRoutingModule
     ],
     providers: [],
     bootstrap: [AppComponent]

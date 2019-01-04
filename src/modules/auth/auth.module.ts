@@ -19,7 +19,7 @@ import {UserInfoComponent} from "./components/userInfo";
     ],
     providers: [
         AuthService,
-        AuthGuard
+        AuthGuard,
     ],
     exports: [
         SignInFormComponent,

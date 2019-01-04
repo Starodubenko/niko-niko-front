@@ -1,4 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Subject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
 import {AuthService} from "../../service";
 import {UserDto} from "../../../core/dto";
 
@@ -7,21 +9,32 @@ import {UserDto} from "../../../core/dto";
     templateUrl: './UserInfo.component.html',
     styleUrls: ['./UserInfo.css'],
 })
-export class UserInfoComponent implements OnInit {
+export class UserInfoComponent implements OnInit, OnDestroy {
+    private destroy$ = new Subject();
 
     userInfo: UserDto;
 
-    constructor(private authService: AuthService){}
+    constructor(private authService: AuthService) {}
 
     get userName() {
-        return `${this.userInfo.name} ${this.userInfo.surname}`;
+        return this.userInfo && `${this.userInfo.name} ${this.userInfo.surname}`;
     }
 
     get team() {
-        return this.userInfo.team;
+        return this.userInfo && this.userInfo.team;
     }
 
     ngOnInit(): void {
-        this.userInfo = this.authService.getUserInfo();
+        this.authService.getUserInfo$()
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(userInfo => {
+                this.userInfo = userInfo;
+            });
+    }
+
+    ngOnDestroy(): void {
+        this.destroy$.next();
     }
 }
