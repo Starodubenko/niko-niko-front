@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule} from "@angular/router";
 import {routes} from "./routes";
 import {NikoViewModule} from "../views/niko";
-import {LoginViewModule} from "../views/logIn";
+import {UnauthorizedViewModule} from "../views/unauthorized";
 import {NotFoundViewModule} from "../views/notFound";
 import {AppRoutesComponent} from "./AppRoutes.component";
 import {MainViewModule} from "../views/main";
@@ -13,7 +13,7 @@ import {MainViewModule} from "../views/main";
     ],
     imports: [
         MainViewModule,
-        LoginViewModule,
+        UnauthorizedViewModule,
         NikoViewModule,
         NotFoundViewModule,
         RouterModule.forRoot(

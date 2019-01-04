@@ -1,17 +1,17 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
-import {LoginViewComponent} from './LoginView.component';
+import {UnauthorizedViewComponent} from './UnauthorizedView.component';
 
 @NgModule({
   declarations: [
-    LoginViewComponent
+    UnauthorizedViewComponent
   ],
   imports: [
     BrowserModule,
   ],
   exports: [
-    LoginViewComponent
+    UnauthorizedViewComponent
   ]
 })
-export class LoginViewModule { }
+export class UnauthorizedViewModule { }

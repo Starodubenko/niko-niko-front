@@ -1,3 +1,3 @@
-export * from './logIn';
+export * from './unauthorized';
 export * from './niko';
 export * from './notFound';
