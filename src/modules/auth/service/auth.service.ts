@@ -4,6 +4,7 @@ import {Observable, of} from "rxjs";
 import {catchError, tap} from "rxjs/operators";
 import jwtdecode from "jwt-decode";
 import {BrowserStorageHelper} from "../utils";
+import {UserDto} from "../../core/dto";
 
 @Injectable()
 export class AuthService {
@@ -16,7 +17,9 @@ export class AuthService {
             password
         }).pipe(
             tap((data: any) => {
-                BrowserStorageHelper.setAuthToken(data.token, rememberMe)
+                const bearerToken = `Bearer ${data.token}`;
+
+                BrowserStorageHelper.setAuthToken(bearerToken, rememberMe)
             }),
             catchError((e: any) => {
                 return of(e);
@@ -46,7 +49,9 @@ export class AuthService {
         });
     }
 
-    getUserInfo() {
-        return jwtdecode(BrowserStorageHelper.getAuthToken()).data;
+    getUserInfo(): UserDto | null {
+        return BrowserStorageHelper.getAuthToken()
+            ? jwtdecode(BrowserStorageHelper.getAuthToken()).data
+            : null;
     }
 }

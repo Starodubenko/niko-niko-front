@@ -1,18 +1,26 @@
 import {Injectable} from "@angular/core";
 import {Observable, Subject} from "rxjs";
 import {ApiMoodService} from "../../api/services/apiMood.service";
+import {AuthService} from "../../auth/service";
+import {BrowserStorageHelper} from "../../auth/utils";
 
 @Injectable()
 export class MoodService {
     moodSocket: SocketIOClient.Socket;
     currentMoodLevel$ = new Subject<string>();
 
-    constructor(private apiMoodService: ApiMoodService) {
+    constructor(private apiMoodService: ApiMoodService,
+                private authService: AuthService) {
 
     }
 
     connectSocket() {
-        this.moodSocket = this.apiMoodService.currentMoodConnection();
+        const currentUser = this.authService.getUserInfo();
+
+        this.moodSocket = this.apiMoodService.currentMoodConnection(
+            currentUser && currentUser.id,
+            BrowserStorageHelper.getAuthToken()
+        );
 
         this.moodSocket.on('connect', () => {
             console.log('connected to ws: 3000');
@@ -37,9 +45,11 @@ export class MoodService {
     }
 
     selectMood(moodLevel: string) {
+        const currentUser = this.authService.getUserInfo()
+
         this.moodSocket.emit('selectCurrentMood', {
             moodLevel: moodLevel,
-            userId: '1'
+            userId: currentUser && currentUser.id
         });
     }
 
