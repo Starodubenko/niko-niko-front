@@ -5,15 +5,17 @@ import {AuthService} from "./service";
 import {AuthGuard} from "./guard";
 import {SignInFormComponent} from "./components/signInForm";
 import {SignOutButtonComponent} from "./components/signOutButton";
+import {UserInfoComponent} from "./components/userInfo";
 
 @NgModule({
     imports: [
         ReactiveFormsModule,
-        HttpClientModule
+        HttpClientModule,
     ],
     declarations: [
         SignInFormComponent,
-        SignOutButtonComponent
+        SignOutButtonComponent,
+        UserInfoComponent,
     ],
     providers: [
         AuthService,
@@ -21,7 +23,8 @@ import {SignOutButtonComponent} from "./components/signOutButton";
     ],
     exports: [
         SignInFormComponent,
-        SignOutButtonComponent
+        SignOutButtonComponent,
+        UserInfoComponent,
     ]
 })
 export class AuthModule {
