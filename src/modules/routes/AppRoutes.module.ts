@@ -1,11 +1,15 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from "@angular/router";
 import {routes} from "./routes";
-import {NikoViewModule} from "../views/niko";
-import {UnauthorizedViewModule} from "../views/unauthorized";
-import {NotFoundViewModule} from "../views/notFound";
 import {AppRoutesComponent} from "./AppRoutes.component";
-import {MainViewModule} from "../views/main";
+import {
+    NikoViewModule,
+    UnauthorizedViewModule,
+    NotFoundViewModule,
+    MainViewModule,
+    TeamViewModule
+} from "../views";
+
 
 @NgModule({
     declarations: [
@@ -13,6 +17,7 @@ import {MainViewModule} from "../views/main";
     ],
     imports: [
         MainViewModule,
+        TeamViewModule,
         UnauthorizedViewModule,
         NikoViewModule,
         NotFoundViewModule,
