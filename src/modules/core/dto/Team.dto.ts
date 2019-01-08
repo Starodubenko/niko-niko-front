@@ -1,6 +1,11 @@
 import {ITeammateDto} from './Teammate.dto';
 
-export interface ITeamDto {
+export interface IShortTeamDto {
+  id: string;
+  title: string;
+}
+
+export interface ITeamDto extends IShortTeamDto {
   id: string;
   title: string;
   teammates: ITeammateDto[];
