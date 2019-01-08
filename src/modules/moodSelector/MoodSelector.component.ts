@@ -34,4 +34,13 @@ export class MoodSelectorComponent implements OnInit {
                 this.isLoading = false;
             });
     }
+
+    isLinkVisible() {
+        return !!this.currentMoodLevel;
+    }
+
+    goToTeamView(event: Event) {
+        event.preventDefault();
+        this.moodSelectorService.redirectToTeamView();
+    }
 }

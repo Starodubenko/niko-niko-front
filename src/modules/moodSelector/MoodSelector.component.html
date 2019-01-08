@@ -9,3 +9,8 @@
 <app-mood-item *ngIf="isVisible(moodType.GOOD)"
                (click)="onMoodClick(moodType.GOOD)"
                [mood]="moodType.GOOD"></app-mood-item>
+
+<a href="#" *ngIf="isLinkVisible()"
+            (click)="goToTeamView($event)">
+    Go to the team view
+</a>
