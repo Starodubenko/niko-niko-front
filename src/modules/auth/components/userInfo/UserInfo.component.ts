@@ -21,7 +21,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     }
 
     get team() {
-        return this.userInfo && this.userInfo.team;
+        return this.userInfo && this.userInfo.team.title;
     }
 
     ngOnInit(): void {
