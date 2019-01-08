@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {TeamViewComponent} from './TeamView.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {TeamSelectorModule} from "../../teamSelector";
 
 @NgModule({
     declarations: [
@@ -10,7 +10,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     ],
     imports: [
         BrowserModule,
-        ReactiveFormsModule
+        TeamSelectorModule
     ],
     exports: [
         TeamViewComponent
