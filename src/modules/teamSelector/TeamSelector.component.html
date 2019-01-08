@@ -1,0 +1,13 @@
+<form *ngIf="form"
+      [formGroup]="form"
+      class="TeamView-filter">
+    <div class="TeamView-teamSelector">
+        <select formControlName="teamId">
+            <option value="1">Team1</option>
+            <option value="2">Team2</option>
+            <option value="3">Team3</option>
+        </select>
+    </div>
+
+    <div>selected team: {{form.get('teamId').value}}</div>
+</form>
