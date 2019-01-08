@@ -1,12 +1,17 @@
 import {NgModule} from '@angular/core';
-import {ApiTeammateService} from './services/apiTeammate.sevice';
-import {ApiMoodService} from "./services/apiMood.service";
+import {
+    ApiTeammateService,
+    ApiMoodService,
+    ApiTeamService,
+} from "./services";
 
 
 @NgModule({
     providers: [
         ApiTeammateService,
-        ApiMoodService
+        ApiMoodService,
+        ApiTeammateService,
+        ApiTeamService,
     ]
 })
 export class ApiModule {
