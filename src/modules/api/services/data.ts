@@ -20,25 +20,26 @@ export const teamData = {
         '1': {
             id: '1',
             title: 'Tigers',
-            employees: [1, 2, 3]
+            teammates: [1, 2, 3]
         },
         '2': {
             id: '2',
             title: 'Lions',
-            employees: [1, 2]
+            teammates: [1, 2]
         },
         '3': {
             id: '3',
             title: 'Bears',
-            employees: [1]
+            teammates: [1]
         }
     },
-    employees: {
+    teammates: {
         '1': {
             id: '1',
             firstName: 'John',
             surname: 'Doe',
             teamId: '1',
+            currentMoodLevel: '',
             moods: generateMoods(5)
         },
         '2': {
@@ -46,6 +47,7 @@ export const teamData = {
             firstName: 'Michel',
             surname: 'Huk',
             teamId: '1',
+            currentMoodLevel: '',
             moods: generateMoods(5)
         },
         '3': {
@@ -53,6 +55,7 @@ export const teamData = {
             firstName: 'Vanessa',
             surname: 'Collins',
             teamId: '1',
+            currentMoodLevel: '',
             moods: generateMoods(5)
         }
     },

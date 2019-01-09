@@ -2,8 +2,10 @@ import {Injectable} from "@angular/core";
 import {Observable, of} from "rxjs";
 import {AuthService} from "../../auth/service";
 import {IInitialTeamData} from "../interface";
-import {ApiTeammateService} from "../../api";
-import {ApiTeamService} from "../../api/services/apiTeam.sevice";
+import {
+    ApiTeammateService,
+    ApiTeamService
+} from "../../api";
 import {IShortTeammateDto} from "../../core/dto";
 
 @Injectable()
@@ -15,8 +17,8 @@ export class TeamService {
 
     }
 
-    getTeammateListByTeamId(teamId: string): Observable<IShortTeammateDto[]>  {
-            return of(null);
+    getTeammateListByTeamId(teamId: string): Observable<IShortTeammateDto[]> {
+        return this.apiTeammateService.getAllInTeam(teamId);
     }
 
     getMyTeamData(): Observable<IInitialTeamData> {

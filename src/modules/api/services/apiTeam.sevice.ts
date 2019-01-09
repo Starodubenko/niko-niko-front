@@ -20,7 +20,7 @@ export class ApiTeamService {
     }
 
     getInitialTeamData(userId: string): Observable<IInitialTeamData> {
-        const currentEmployee = teamData.employees[userId];
+        const currentEmployee = teamData.teammates[userId];
         const currentTeam = teamData.teams[currentEmployee.teamId];
 
         return forkJoin(
