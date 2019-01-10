@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {switchMap} from "rxjs/operators";
+import {ActivatedRoute, Router} from "@angular/router";
 import {TeamSelectorService} from "./service";
-import {IShortTeamDto, IShortTeammateDto} from "../core/dto";
+import {IShortTeamDto} from "../core/dto";
 
 @Component({
     selector: 'app-team-selector',
@@ -12,35 +12,38 @@ import {IShortTeamDto, IShortTeammateDto} from "../core/dto";
         TeamSelectorService
     ]
 })
-export class TeamSelectorComponent implements OnInit {
+export class TeamSelectorComponent implements OnInit, OnChanges {
+
+    @Input() teamId: string;
 
     isLoading = true;
     form: FormGroup;
     teamList: IShortTeamDto[];
-    teammateList: IShortTeammateDto[];
 
     constructor(private fb: FormBuilder,
-                private teamSelectorService: TeamSelectorService) {
+                private teamSelectorService: TeamSelectorService,
+                private router: Router) {
     }
 
 
     ngOnInit() {
+        this.form = this.fb.group({
+            teamId: [this.teamId],
+        });
+
         this.teamSelectorService.currentTeam()
             .subscribe(teamData => {
-                this.form = this.fb.group({
-                    teamId: [teamData.currentTeamId],
-                });
                 this.teamList = teamData.teamList;
                 this.isLoading = false;
             });
 
         this.form.get('teamId').valueChanges
-            .pipe(
-                switchMap(currentTeamId => {
-                    return this.teamSelectorService.selectTeam(currentTeamId);
-                })
-            ).subscribe(newTeammateList => {
-                this.teammateList = newTeammateList;
+            .subscribe(teamId => {
+                this.router.navigate(['team', teamId]);
         })
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+
     }
 }

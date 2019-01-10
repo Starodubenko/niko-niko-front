@@ -7,8 +7,14 @@ export const routes: Route[] = [
     { path: 'team', component: TeamMainViewComponent,
         // , canActivate: [TeamViewGuard],
         children: [
-            { path: ':id', component: TeammateListViewComponent },
+            {
+                path: ':id',
+                component: TeammateListViewComponent,
+                // children: [
+                //     { path: 'teammate/:id',  TeammateMoodView }
+                // ]
+            },
         ]
     },
-    { path: '',   redirectTo: '/team', pathMatch: 'full' },
+    { path: '', redirectTo: '/team', pathMatch: 'full' },
 ];

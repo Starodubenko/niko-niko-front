@@ -1,0 +1,8 @@
+<div class="TeammateList-item-title">
+    <div class="TeammateList-item-cell">Teammate</div>
+    <div class="TeammateList-item-cell">Current mood level</div>
+</div>
+<div class="TeammateList-item" *ngFor="let teammate of teammateList">
+    <div class="TeammateList-item-cell">{{teammate.firstName + ' ' + teammate.surname}}</div>
+    <div class="TeammateList-item-cell">{{teammate.currentMoodLevel}}</div>
+</div>

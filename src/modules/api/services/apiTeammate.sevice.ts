@@ -11,6 +11,10 @@ export class ApiTeammateService {
     }
 
     getAllInTeam(teamId: string): Observable<IShortTeammateDto[]> {
+        if (!teamId) {
+            of([]);
+        }
+
         const dto = teamData.teams[teamId];
         const teammateList = dto.teammates.map(employeeId => {
             const teammate = teamData.teammates[employeeId];

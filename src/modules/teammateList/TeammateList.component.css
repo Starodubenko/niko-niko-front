@@ -1,0 +1,20 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.TeammateList-item-title {
+  display: flex;
+  font-weight: bold;
+}
+
+.TeammateList-item {
+  display: flex;
+}
+
+.TeammateList-item-cell {
+  display: flex;
+  flex-grow: 1;
+  flex-basis: 1px;
+  justify-content: center;
+}

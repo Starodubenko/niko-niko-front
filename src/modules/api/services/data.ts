@@ -39,7 +39,7 @@ export const teamData = {
             firstName: 'John',
             surname: 'Doe',
             teamId: '1',
-            currentMoodLevel: '',
+            currentMoodLevel: '1',
             moods: generateMoods(5)
         },
         '2': {
@@ -47,7 +47,7 @@ export const teamData = {
             firstName: 'Michel',
             surname: 'Huk',
             teamId: '1',
-            currentMoodLevel: '',
+            currentMoodLevel: '2',
             moods: generateMoods(5)
         },
         '3': {
@@ -55,7 +55,7 @@ export const teamData = {
             firstName: 'Vanessa',
             surname: 'Collins',
             teamId: '1',
-            currentMoodLevel: '',
+            currentMoodLevel: '3',
             moods: generateMoods(5)
         }
     },
