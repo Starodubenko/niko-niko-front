@@ -5,6 +5,7 @@ import {AppComponent} from './app.component';
 import {ApiModule} from '../modules/api';
 import {AppRoutingModule} from "../modules/routes/AppRoutes.module";
 import {AuthModule} from "../modules/auth";
+import {TeamViewModule} from "../modules/views";
 
 @NgModule({
     declarations: [
@@ -14,7 +15,8 @@ import {AuthModule} from "../modules/auth";
         BrowserModule,
         ApiModule,
         AuthModule,
-        AppRoutingModule
+        AppRoutingModule,
+        TeamViewModule
     ],
     providers: [],
     bootstrap: [AppComponent]

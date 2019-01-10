@@ -1,20 +1,13 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
-import {TeamViewComponent} from './TeamView.component';
-import {TeamSelectorModule} from "../../teamSelector";
+import {TeamRoutingModule} from "./routing";
 
 @NgModule({
-    declarations: [
-        TeamViewComponent
-    ],
     imports: [
         BrowserModule,
-        TeamSelectorModule
+        TeamRoutingModule,
     ],
-    exports: [
-        TeamViewComponent
-    ]
 })
 export class TeamViewModule {
 }
